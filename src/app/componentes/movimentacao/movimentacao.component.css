@@ -24,8 +24,8 @@
 
   .form-container {
     display: flex;
-    align-items: center; /* Alinha verticalmente os itens no centro */    
-    gap: 10px; /* Adiciona um espaço entre os itens */
+    align-items: center; 
+    gap: 10px; 
   }
 
   .actions-header, .actions-cell {

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from '../cliente.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class ClienteAddComponent implements OnInit {
     private fb: FormBuilder, 
     private clienteService: ClienteService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
 
   ) { 
     const routeId = this.route.snapshot.paramMap.get("id");
@@ -54,10 +56,22 @@ export class ClienteAddComponent implements OnInit {
 
   salvarCliente() {
     if (this.clienteForm.valid) {
-      this.clienteService.addCliente(this.clienteForm.value).subscribe({
-        next: (result) => this.router.navigate(['/cliente']),
-        error: (error) => console.error('Erro ao cadastrar cliente', error)
-      });
+      const cliente = this.clienteForm.value;
+      if (this.id) {        
+        this.clienteService.updateCliente(this.id, cliente).subscribe({
+          next: () => this.router.navigate(['/cliente']),
+          error: (error) => {
+            let snackBarRef = this.snackBar.open('Erro ao atualizar cliente', 'Fechar', {
+              duration: 3000
+            });
+          }
+        });
+      } else {        
+        this.clienteService.addCliente(cliente).subscribe({
+          next: () => this.router.navigate(['/cliente']),
+          error: (error) => console.error('Erro ao cadastrar cliente', error)
+        });
+      }
     }
   }
 }

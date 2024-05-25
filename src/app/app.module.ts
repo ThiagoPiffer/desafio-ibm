@@ -19,6 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 
+
+
 import { AppComponent } from './app.component';
 
 import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.component';
@@ -26,6 +28,8 @@ import { ClienteReadComponent } from './componentes/cliente/cliente-read/cliente
 import { ClienteAddComponent } from './componentes/cliente/cliente-add/cliente-add.component';
 
 import { MovimentacaoComponent } from './componentes/movimentacao/movimentacao.component';
+
+import { ConfirmDialogComponent } from './componentes/ConfirmDialog/ConfirmDialog.component';
 
 
 @NgModule({
@@ -36,7 +40,9 @@ import { MovimentacaoComponent } from './componentes/movimentacao/movimentacao.c
     ClienteReadComponent,
     ClienteAddComponent,
     
-    MovimentacaoComponent
+    MovimentacaoComponent,
+
+    ConfirmDialogComponent
     
   ],
   imports: [

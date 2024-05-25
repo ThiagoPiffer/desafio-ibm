@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Confirmação</h1>
-<div mat-dialog-content>
-  {{ data.message }}
+<h1 mat-dialog-title class="dialog-title">Confirmação</h1>
+<div mat-dialog-content class="dialog-content">  
+  <p>{{ data.message }}</p>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions align="end" class="dialog-actions">
   <button mat-button (click)="onDismiss()">Cancelar</button>
-  <button mat-button color="warn" (click)="onConfirm()">Deletar</button>
+  <button mat-raised-button color="warn" (click)="onConfirm()">Deletar</button>
 </div>
