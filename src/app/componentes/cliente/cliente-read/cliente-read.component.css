@@ -1,0 +1,22 @@
+/* Stylesheet for the component */
+.id-column {
+    width: 50px; /* Adjust the width as needed */
+  }
+  
+  .icon-column {
+    width: 100px; /* Adjust the width to fit the icons */
+    text-align: center; /* Center the icons in the column */
+  }
+  
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  h1 {
+    margin: 0; /* Remove a margem padrão para alinhar corretamente */
+  }
+  

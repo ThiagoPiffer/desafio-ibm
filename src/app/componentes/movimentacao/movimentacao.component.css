@@ -1,0 +1,37 @@
+.saldo-container {
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .positivo {
+    border: 2px solid green;
+  }
+  
+  .negativo {
+    border: 2px solid red;
+  }
+
+  
+.button-credito {
+    background-color: green; 
+  }
+  
+  .button-debito {
+    background-color: #CD5C5C;
+  }
+
+  .form-container {
+    display: flex;
+    align-items: center; /* Alinha verticalmente os itens no centro */    
+    gap: 10px; /* Adiciona um espaço entre os itens */
+  }
+
+  .actions-header, .actions-cell {
+    text-align: right;
+  }
+  
+  
+  
+  

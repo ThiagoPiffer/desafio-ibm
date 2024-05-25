@@ -1,0 +1,24 @@
+<h2>Cadastrar Novo Cliente</h2>
+<form [formGroup]="clienteForm" (ngSubmit)="salvarCliente()">
+  <mat-form-field appearance="fill">
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="nome">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Idade</mat-label>
+    <input matInput type="number" formControlName="idade">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Número da Conta</mat-label>
+    <input matInput formControlName="numero_Conta">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="!clienteForm.valid">Salvar Cliente</button>
+</form>
