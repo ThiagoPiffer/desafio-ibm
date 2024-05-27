@@ -16,16 +16,19 @@ import * as moment from 'moment';
 })
 export class MovimentacaoComponent implements OnInit {
   clienteId: number | null = null;
-  cliente: any = {};  
+  cliente: any = {};    
+  clientes: any[] = []; 
   saldo: number = 0;
+  
 
-  displayedColumns: string[] = ['tipo', 'valor', 'dataMovimentacao', 'acoes'];
+  displayedColumns: string[] = ['tipo', 'valor', 'dataMovimentacao', 'destinatario', 'acoes'];
   movimentacoes: Movimentacao[] = [];
 
 
 
   tipoMovimentacao: string = 'credito'; 
   valorMovimentacao: number | null = null;
+  clienteTransferenciaId: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +39,7 @@ export class MovimentacaoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
+    this.loadClientes();
     this.LoadCliente();
   }
 
@@ -58,6 +61,19 @@ export class MovimentacaoComponent implements OnInit {
       });      
     }
   }
+
+  loadClientes() {
+    this.clienteService.getClientes().subscribe({
+      next: (data) => {
+        this.clientes = data.filter(cliente => cliente.id !== this.clienteId);
+      },
+      error: (error) => {
+        this.snackBar.open('Erro ao carregar clientes', 'Fechar', {
+          duration: 3000,
+        });
+      }
+    });
+  }  
 
   loadMovimentacoes(clienteId: number) {
     this.movimentacaoService.getMovimentacoesByClienteId(clienteId).subscribe({
@@ -116,8 +132,13 @@ export class MovimentacaoComponent implements OnInit {
         clienteId: this.clienteId,
         tipo: this.tipoMovimentacao,
         valor: this.valorMovimentacao,
-        dataMovimentacao: moment().format('YYYY-MM-DDTHH:mm:ss')
+        dataMovimentacao: moment().format('YYYY-MM-DDTHH:mm:ss'),
+        clienteIdTransferencia: this.tipoMovimentacao === 'transferencia' ? this.clienteTransferenciaId : 0
       };
+
+      if (this.tipoMovimentacao === 'transferencia' && this.clienteTransferenciaId) {
+        novaMovimentacao.clienteIdTransferencia = this.clienteTransferenciaId;
+      }
 
       this.movimentacaoService.addMovimentacao(novaMovimentacao).subscribe({
         next: (movimentacao) => {          
@@ -156,6 +177,11 @@ export class MovimentacaoComponent implements OnInit {
     });
 
     this.calculateSaldo();
+  }
+
+  getClienteNome(clienteId: number): string {
+    const cliente = this.clientes.find(c => c.id === clienteId);
+    return cliente ? cliente.nome : '';
   }
   
 }

@@ -3,5 +3,6 @@ export class Movimentacao {
     clienteId: number;
     tipo: string;
     valor: number;
-    dataMovimentacao?: string; 
+    dataMovimentacao?: string;
+    clienteIdTransferencia: number = 0; 
 }
